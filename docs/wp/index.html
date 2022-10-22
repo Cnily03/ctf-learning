@@ -1,0 +1,11 @@
+<script>
+    if (window.location.href.includes("wp")) {
+        var t = window.location.href.split(window.location.host)
+        if (t.length > 1) {
+            t[1] = t[1].replace(/\/wp/, "/writeup")
+            window.location = t.join(window.location.hostname)
+        } else {
+            window.location = window.location.href.replace(/\/wp/, "/writeup")
+        }
+    }
+</script>
